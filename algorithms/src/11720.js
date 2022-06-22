@@ -4,14 +4,14 @@ const item = {
     length : input[0],
     inputs : input[1].split(""),
 }
-
 const process = (item) => {
-    let sum=0;
-    for (let index = 0; index <item.length ; index++) {
-        sum = sum + Number(item.inputs[index]);
-    }
-    return sum;
+    // let sum=0;
+    // for (let index = 0; index <item.length ; index++) {
+    //     sum = sum + Number(item.inputs[index]);
+    // }
+    // return sum;
+    return item.inputs.reduce((a,b)=> Number(a)+Number(b));
 }
-
+item.inputs.reduce((a,b)=> Number(a)+Number(b));
 const output = process(item);
 console.log(output);

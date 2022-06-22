@@ -1,28 +1,23 @@
 const fs = require('fs');
-const input = fs.readFileSync('./dev/stdin').toString().trim().split('\n');
-const item = {
-    size: input[0],
-    subject: input[1].split(" "),
+const line = fs.readFileSync('./dev/stdin').toString().trim().split('\n');
+const input = {
+    size: +line[0],
+    subject: line[1].split(" ").map(item=> +item),
 }
 const process = (item) => {
-    let subject = [...item.subject];
-    let max=0;
-    const new_subject = [];
-    let sum=0;
-    let avg=0;
-    for (const item of subject) {
-        if(item > max) {
-            max = Number(item);
+    const max = input.subject.reduce((memo, item) => {
+        if(item > memo) {
+            memo = item;
         }
-    }
-    for (const item of subject) {
-        new_subject.push(item/max*100);
-    }
-    for (const item of new_subject) {
-        sum = sum+item;
-    }
-    avg = sum / item.size;
+        return memo;
+    });
+    const new_subject = input.subject.map((item) => item/max*100);
+    const sum = new_subject.reduce((memo,item) => {
+        memo = memo+item;
+        return memo;
+    });
+    const avg = sum / input.size;
     return avg;
 }
-const output = process(item);
+const output = process(input);
 console.log(output);
