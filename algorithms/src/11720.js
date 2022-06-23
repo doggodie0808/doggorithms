@@ -1,17 +1,15 @@
 const fs = require('fs');
-const input = fs.readFileSync('./dev/stdin').toString().trim().split('\n');
-const item = {
-    length : input[0],
-    inputs : input[1].split(""),
+const line = fs.readFileSync('./dev/stdin').toString().trim().split('\n');
+const input = {
+    size : +line[0],
+    list : line[1].split("").map(item=>+item),
 }
-const process = (item) => {
-    // let sum=0;
-    // for (let index = 0; index <item.length ; index++) {
-    //     sum = sum + Number(item.inputs[index]);
-    // }
-    // return sum;
-    return item.inputs.reduce((a,b)=> Number(a)+Number(b));
-}
-item.inputs.reduce((a,b)=> Number(a)+Number(b));
-const output = process(item);
+const process = (input) => {
+    const sum = input.list.reduce((memo,item)=> {
+        memo = memo+item;
+        return memo;
+    });
+    return sum;
+};
+const output = process(input);
 console.log(output);
